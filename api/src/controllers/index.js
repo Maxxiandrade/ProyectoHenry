@@ -42,24 +42,26 @@ const dogByIdDb = async(id)=>{
 
 };
 
-const dogByName = async(req,res)=>{
+const dogByName = async (req, res) => {
     try {
-        const { name } = req.query;
+        let { name } = req.query;
+        
+        name = name.toLowerCase().replace(/\s/g, '');
 
-        const {data} = await axios(`${URL}`)     
-  
-        const info = data.filter((perro)=>{return perro.name == name})
+        const { data } = await axios(`${URL}`);
 
-        const perro = await getDogName(name)
+        const matches = data.filter((perro) => {
+            const perroName = perro.name.toLowerCase().replace(/\s/g, '');
+            return perroName.includes(name);
+        });
 
         if (!name) {
             return res.status(400).json({ error: "Falta el parámetro 'name' en la consulta" });
         }
-        if(!perro){
-        res.status(200).json(info);}
-        else{res.status(200).json(perro)}
+
+        res.status(200).json(matches);
     } catch (error) {
-        res.status(500).json({error: error.message})
+        res.status(500).json({ error: error.message });
     }
 };
 
@@ -72,7 +74,7 @@ const postDogs = async(req,res)=>{
     try {
         const {nombre, altura, peso, vida, imagen, temperamento} = req.body
 
-        if(!nombre || !altura || !peso || !vida || !imagen || !temperamento){res.status(400).json({error: "Falta info"})}
+        if(!nombre || !altura || !peso || !vida || !imagen){res.status(400).json({error: "Falta info"})}
 
         const newDog = await Dog.create({nombre, altura, peso, vida, imagen})
 
