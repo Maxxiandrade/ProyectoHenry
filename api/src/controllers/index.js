@@ -22,41 +22,50 @@ const getDogs = async (req, res)=>{
         };
 };
 
-const dogByRaza = async(req,res)=>{
+const dogById = async(req,res)=>{
     try {
         const {id} = req.params
+        if(!Number(id)) {const perro = await dogByIdDb(id) 
+        res.status(200).json(perro)}
+            else{
         const {data} = await axios(`${URL}${id}`)
-
-       const perroEncontrado = Temperament.findAll({where:{id: id}})
-       
-       if(perroEncontrado) return res.status(200).json(data)
-
        res.status(200).json(data)
+            }
     } catch (error) {
        res.status(400).json({error: error.message})
    };
+};
+
+const dogByIdDb = async(id)=>{
+    const foundDog = await Dog.findByPk(id)
+        return foundDog
+
 };
 
 const dogByName = async(req,res)=>{
     try {
         const { name } = req.query;
 
+        const {data} = await axios(`${URL}`)     
+  
+        const info = data.filter((perro)=>{return perro.name == name})
+
+        const perro = await getDogName(name)
+
         if (!name) {
             return res.status(400).json({ error: "Falta el parámetro 'name' en la consulta" });
         }
-
-        const dogs = await Dog.findAll({
-            where: {
-                nombre: {
-                    [Op.iLike]: `%${name}%` // Utilizamos Op.iLike para hacer una búsqueda case-insensitive
-                }
-            }
-        });
-
-        res.status(200).json(dogs);
+        if(!perro){
+        res.status(200).json(info);}
+        else{res.status(200).json(perro)}
     } catch (error) {
         res.status(500).json({error: error.message})
     }
+};
+
+const getDogName = async(nombre)=>{
+    const perro = await Dog.findOne({where:{nombre: nombre}})
+    return perro
 };
 
 const postDogs = async(req,res)=>{
@@ -81,7 +90,7 @@ const postDogs = async(req,res)=>{
 
 module.exports={
     getDogs,
-    dogByRaza,
+    dogById,
     postDogs,
     dogByName
 };
