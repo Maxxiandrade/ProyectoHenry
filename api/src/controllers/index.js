@@ -11,11 +11,13 @@ const getDogs = async (req, res)=>{
         const {data} = await axios(`${URL}`)
         
         const dog = data.map((perro)=> {return {
+             id: perro.id,
              imagen: perro.reference_image_id,
              nombre:perro.name, 
              altura: perro.height, 
              peso:perro.weight, 
-             vida: perro.life_span}})
+             vida: perro.life_span,
+             temperamento: perro.temperament}})
             res.status(200).json(dog)
     } catch (error) {
             res.status(500).json({error: error.message})

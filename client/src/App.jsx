@@ -11,7 +11,8 @@ import React, { useEffect, useState } from 'react';
 
 function App() {
    const [currentPage, setCurrentPage] = useState(1);
-  const itemsPerPage = 5; // Número de cards por página
+  const perrosPorPagina = 8; 
+  const paginas = []
 
 
   return (
