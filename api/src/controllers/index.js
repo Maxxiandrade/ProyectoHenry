@@ -4,21 +4,31 @@ const axios = require('axios');
 require('dotenv').config();
 const {API_KEY} = process.env;
 const URL = "https://api.thedogapi.com/v1/breeds/"
-
+const imgUrl= "https://api.thedogapi.com/v1/images/"
 
 const getDogs = async (req, res)=>{
     try {
-        const {data} = await axios(`${URL}`)
         
-        const dog = data.map((perro)=> {return {
-             id: perro.id,
-             imagen: perro.reference_image_id,
-             nombre:perro.name, 
-             altura: perro.height, 
-             peso:perro.weight, 
-             vida: perro.life_span,
-             temperamento: perro.temperament}})
-            res.status(200).json(dog)
+        const {data} = await axios(`${URL}?api_key=${API_KEY}`)
+ 
+        const dogPromises = data.map(async (perro) => {
+            const response = await axios(`${imgUrl}${perro.reference_image_id}`);
+            const imagenUrl = response.data.url;
+      
+            return {
+              id: perro.id,
+              imagen: imagenUrl,
+              nombre: perro.name, 
+              altura: perro.height, 
+              peso: perro.weight, 
+              vida: perro.life_span,
+              temperamento: perro.temperament
+            };
+          });
+      
+          const dogs = await Promise.all(dogPromises);
+      
+                res.status(200).json(dogs)
     } catch (error) {
             res.status(500).json({error: error.message})
         };

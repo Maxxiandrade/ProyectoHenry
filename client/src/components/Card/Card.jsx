@@ -3,6 +3,7 @@ import React from "react";
 const Card = ({id, imagen, nombre, pesoImp, pesoMetric, temperamento})=>{
     return(
         <div>
+            <img src={imagen}></img>
             <p>{nombre}</p>
             <p>{imagen}</p>
             <p>Peso imperial: {pesoImp}</p>

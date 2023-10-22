@@ -18,7 +18,7 @@ const Home = ()=>{
         
       }
     };
-    console.log(perros);
+   
     useEffect(()=>{
       if(!perros.length){
         onGetData()
