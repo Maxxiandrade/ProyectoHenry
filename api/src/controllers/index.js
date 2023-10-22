@@ -15,7 +15,7 @@ const getDogs = async (req, res)=>{
              nombre:perro.name, 
              altura: perro.height, 
              peso:perro.weight, 
-             vida: perro.lifespan }})
+             vida: perro.life_span}})
             res.status(200).json(dog)
     } catch (error) {
             res.status(500).json({error: error.message})

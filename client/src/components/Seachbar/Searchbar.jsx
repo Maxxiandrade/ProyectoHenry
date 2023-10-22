@@ -1,6 +1,19 @@
-const SearchBar = ()=>{
+import { useState } from "react";
+
+const SearchBar = (onSearch)=>{
+
+    const [id, setId] = useState("")
+
+    const handleChange = (event)=>{
+        setId(event.target.value)
+    }
+
     return(
-        <input type="text" />
+        <input 
+         type='search'
+         value={id}
+         onChange={handleChange}
+         />
     )
 };
 
