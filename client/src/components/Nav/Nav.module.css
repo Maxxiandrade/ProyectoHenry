@@ -1,0 +1,27 @@
+.nav{
+    background-color: #ED7D31;
+    
+}
+
+.h1{
+    display: flex;
+    justify-content: flex-start;
+    color: yellow;
+    text-shadow: -1px -1px 0  #4F4A45,  
+    1px -1px 0  #4F4A45,
+   -1px 1px 0  #4F4A45,
+    1px 1px 0 #4F4A45;
+    
+}
+
+.h2{
+    text-shadow: -1px -1px 0  black,  
+    1px -1px 0  black,
+   -1px 1px 0  black,
+    1px 1px 0 black;
+    color: #6C5F5B;
+    display: flex;
+    justify-content: start;
+    margin-left: 5%;
+}
+

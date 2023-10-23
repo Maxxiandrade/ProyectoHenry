@@ -11,8 +11,8 @@ const Cards = ({ perros }) => {
           id={perro.id}
           imagen={perro.imagen}
           nombre={perro.nombre}
-          pesoImp={perro.peso.imperial}
-          pesoMetric={perro.peso.metric}
+          pesoImp={perro.peso?.imperial}
+          pesoMetric={perro.peso?.metric}
           temperamento={perro.temperamento}
           />
           ))}

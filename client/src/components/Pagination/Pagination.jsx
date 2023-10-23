@@ -1,19 +1,27 @@
 import React from 'react';
+import style from './Pagination.module.css'
 
-const Pagination = ({ currentPage, totalPages, onPageChange }) => {
-  const pageNumbers = Array.from({ length: totalPages }, (_, i) => i + 1);
+const Pagination = ({ dogsPerPage, dogs, paginado, currentPage }) => {
+  const pageNumbers = [];
+
+  for(let i = 0; i < Math.ceil(dogs.length / dogsPerPage); i++) {
+    pageNumbers.push(i + 1);
+  }
 
   return (
     <div className="pagination">
-      {pageNumbers.map((number) => (
-        <span
-          key={number}
-          onClick={() => onPageChange(number)}
-          className={currentPage === number ? 'active' : ''}
-        >
-          {number}
-        </span>
-      ))}
+      <nav>
+        <ul>
+          {pageNumbers.map(number => (
+            <li
+              key={number}
+              className={`${style.li} ${currentPage === number ? style.liSelec : ''}`}
+            >
+              <a onClick={() => paginado(number)}>{number}</a>
+            </li>
+          ))}
+        </ul>
+      </nav>
     </div>
   );
 };

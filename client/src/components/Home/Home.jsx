@@ -1,12 +1,22 @@
 import { Link } from "react-router-dom";
-import SearchBar from "../Seachbar/Searchbar";
+import Nav from "../Nav/Nav";
 import CardList from '../Card/CardList'
-import { useState, useEffect } from "react";
+import { useState, useEffect} from "react";
 import axios from "axios";
+import Pagination from "../Pagination/Pagination";
+import style from "./Home.module.css"
 
 const Home = ()=>{
-    const [perros, setPerros] = useState([])
+   
+    const [perros, setPerros] = useState([]);
+    const [currentPage, setCurrentPage] = useState(1);
+    const [dogsPerPage, setDogsPerPage] = useState(8);
 
+    const lastDogIndex = currentPage * dogsPerPage // 8
+    const firstDogIndex = lastDogIndex - dogsPerPage // 0
+    const currentDogs = perros.slice(firstDogIndex, lastDogIndex)
+
+    const paginado = (pagenumber)=>{return setCurrentPage(pagenumber)}
 
     const onGetData = async(id)=>{
       if(id){
@@ -15,22 +25,43 @@ const Home = ()=>{
       }else{
         const {data} = await axios(`http://localhost:3001/dogs`)
         setPerros(data)
-        
+        console.log(data);
       }
     };
+    const onSearch = async(id)=>{
+      try {
+          if(!id){
+            window.alert("Inserte una raza porfavor")
+          }
+          if(id){
+            onGetData(id)
+             const {data} = await axios(`http://localhost:3001/dogs/name?name=${id}`)
+             console.log(data);
+             setPerros(data)
+          }
+      } catch (error) {
+          throw Error(error)
+      }
+    }
    
+    
     useEffect(()=>{
       if(!perros.length){
         onGetData()
       }
     },[perros])
+    
+    
+
     return(
-        <div>
-            <h1>Página home..</h1>
-            <Link to='/'><button>Back</button></Link>
-            <SearchBar/>
-            <CardList perros={perros}></CardList>
+      <>
+      <div >
+            <Nav onSearch={onSearch}></Nav>
+            <Pagination dogsPerPage={dogsPerPage} dogs={perros} paginado={paginado} currentPage={currentPage}/>
+            <CardList perros={currentDogs}></CardList>
+            <Pagination dogsPerPage={dogsPerPage} dogs={perros} paginado={paginado} currentPage={currentPage}/>
             </div>
+      </>
     )
 };
 

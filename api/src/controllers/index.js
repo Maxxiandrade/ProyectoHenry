@@ -10,9 +10,9 @@ const getDogs = async (req, res)=>{
     try {
 
         const {data} = await axios(`${URL}?api_key=${API_KEY}`)
- 
-        const dogPromises = data.map(async (perro) => {
- 
+        console.log(data);
+        const dogs = data.map((perro) => {
+            
             return {
               id: perro.id,
               imagen: perro.image.url,
@@ -24,7 +24,7 @@ const getDogs = async (req, res)=>{
             };
           });
       
-          const dogs = await Promise.all(dogPromises);
+          
       
                 res.status(200).json(dogs)
     } catch (error) {
@@ -58,18 +58,34 @@ const dogByName = async (req, res) => {
         
         name = name.toLowerCase().replace(/\s/g, '');
 
-        const { data } = await axios(`${URL}`);
+        console.log(name);
+
+        const { data } = await axios(`${URL}?api_key=${API_KEY}`);
 
         const matches = data.filter((perro) => {
             const perroName = perro.name.toLowerCase().replace(/\s/g, '');
             return perroName.includes(name);
         });
+        const dogs = matches.map((perro) => {
+            return {
+              id: perro.id,
+              imagen: perro.image.url,
+              nombre: perro.name, 
+              altura: perro.height, 
+              peso: perro.weight, 
+              vida: perro.life_span,
+              temperamento: perro.temperament
+            };
+          });
+      
+
+        console.log(dogs);
 
         if (!name) {
             return res.status(400).json({ error: "Falta el parámetro 'name' en la consulta" });
         }
 
-        res.status(200).json(matches);
+        res.status(200).json(dogs);
     } catch (error) {
         res.status(500).json({ error: error.message });
     }

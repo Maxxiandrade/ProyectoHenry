@@ -1,0 +1,13 @@
+.searchbar{
+    display: flexbox;
+    border-radius: 10px;
+    border-color: #4F4A45;
+    width: 550px;
+    height: 50px;
+    
+}
+
+.button{
+    width: 70px;
+    height: 50px;
+}
