@@ -4,6 +4,8 @@
 }
 
 .h1{
+    
+    font-size: xx-large;
     display: flex;
     justify-content: flex-start;
     color: yellow;
@@ -15,6 +17,8 @@
 }
 
 .h2{
+    
+    font-size: xx-large;
     text-shadow: -1px -1px 0  black,  
     1px -1px 0  black,
    -1px 1px 0  black,
@@ -25,3 +29,21 @@
     margin-left: 5%;
 }
 
+.li {
+    padding: 1px;
+    display: flex;
+    margin: 0 5px;
+    cursor: pointer;
+    background-color: #4F4A45;
+    border-radius: 10%;
+    color: #F6F1EE;
+    width: 30px; 
+    height: 30px; 
+    text-align: center; 
+    line-height: 30px; 
+    
+}
+
+.li:hover{
+    transform: scale(1.1)
+}

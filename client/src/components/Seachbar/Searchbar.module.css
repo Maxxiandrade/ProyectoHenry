@@ -5,9 +5,44 @@
     width: 550px;
     height: 50px;
     
+    
 }
 
 .button{
     width: 70px;
     height: 50px;
+}
+
+.buttonX{
+    transition: transform 0.3s ease;
+    padding: 1px;
+    display: inline-block;
+    margin: 0 5px;
+    cursor: pointer;
+    background-color: #4F4A45;
+    border-color: black;
+    border-radius: 100%;
+    color: #F6F1EE;
+    width: 30px; 
+    height: 30px; 
+    text-align: center; 
+    line-height: 30px; 
+    text-align: center;
+    
+}
+
+.buttonX:hover{
+    transform: scale(1.1)
+}
+
+.lupa{
+    transition: transform 0.3s ease;
+  
+    width: 30px;
+    height: 30px;
+    top:30px
+}
+
+.lupa:hover{
+    transform: scale(1.1)
 }

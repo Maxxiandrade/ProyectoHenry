@@ -13,6 +13,10 @@
     
 }
 
+.li:hover{
+    transform: scale(1.1)
+}
+
 .liSelec {
     
     padding: 5px;

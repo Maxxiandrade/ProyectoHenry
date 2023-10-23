@@ -58,8 +58,6 @@ const dogByName = async (req, res) => {
         
         name = name.toLowerCase().replace(/\s/g, '');
 
-        console.log(name);
-
         const { data } = await axios(`${URL}?api_key=${API_KEY}`);
 
         const matches = data.filter((perro) => {

@@ -25,13 +25,13 @@ const Home = ()=>{
       }else{
         const {data} = await axios(`http://localhost:3001/dogs`)
         setPerros(data)
-        console.log(data);
+       
       }
     };
     const onSearch = async(id)=>{
       try {
           if(!id){
-            window.alert("Inserte una raza porfavor")
+           onGetData()
           }
           if(id){
             onGetData(id)

@@ -9,7 +9,7 @@ const Nav = ({onSearch})=>{
             </h1>
             <h2 className={style.h2}>Dogs</h2>
             <SearchBar onSearch={onSearch}></SearchBar>
-            <Link to='/'><button>Back</button></Link>
+            <Link to='/'><li className={style.li}>Out</li></Link>
         </nav>
     )
 };
