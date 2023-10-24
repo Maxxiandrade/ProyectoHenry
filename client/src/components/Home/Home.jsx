@@ -5,10 +5,15 @@ import { useState, useEffect} from "react";
 import axios from "axios";
 import Pagination from "../Pagination/Pagination";
 import style from "./Home.module.css"
+import {useDispatch, useSelector} from "react-redux";
+import { getDogs, getTempers } from "../redux/actions";
+
 
 const Home = ()=>{
+   const perros = useSelector(state=>state.dogs);
    
-    const [perros, setPerros] = useState([]);
+   const dispatch = useDispatch();
+
     const [currentPage, setCurrentPage] = useState(1);
     const [dogsPerPage, setDogsPerPage] = useState(8);
 
@@ -18,48 +23,29 @@ const Home = ()=>{
 
     const paginado = (pagenumber)=>{return setCurrentPage(pagenumber)}
 
-    const onGetData = async(id)=>{
-      if(id){
-        const {data} = await axios(`http://localhost:3001/dogs/${id}`)
-        setPerros(data)
-      }else{
-        const {data} = await axios(`http://localhost:3001/dogs`)
-        setPerros(data)
-       
-      }
-    };
-    const onSearch = async(id)=>{
-      try {
-          if(!id){
-           onGetData()
-          }
-          if(id){
-            onGetData(id)
-             const {data} = await axios(`http://localhost:3001/dogs/name?name=${id}`)
-             console.log(data);
-             setPerros(data)
-          }
-      } catch (error) {
-          throw Error(error)
-      }
-    }
-   
-    
     useEffect(()=>{
-      if(!perros.length){
-        onGetData()
-      }
-    },[perros])
-    
-    
+      dispatch(getDogs())
+      dispatch(getTempers())
+    },[dispatch])
 
+    
     return(
       <>
       <div >
-            <Nav onSearch={onSearch}></Nav>
+            <Nav/>
             <Pagination dogsPerPage={dogsPerPage} dogs={perros} paginado={paginado} currentPage={currentPage}/>
-            <CardList perros={currentDogs}></CardList>
+           { currentDogs.map((perro)=>{return <CardList
+                
+                key={perro.id}
+                id={perro.id}
+                imagen={perro.imagen}
+                nombre={perro.nombre}
+                pesoImp={perro.peso?.imperial}
+                pesoMetric={perro.peso?.metric}
+                temperamento={perro.temperamento}
+            ></CardList>})}
             <Pagination dogsPerPage={dogsPerPage} dogs={perros} paginado={paginado} currentPage={currentPage}/>
+           
             </div>
       </>
     )

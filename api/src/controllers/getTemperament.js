@@ -7,18 +7,17 @@ async function getTemperament(req,res){
         const isEmpty = await Temperament.count() === 0
 
         if(isEmpty){
-            const response = await axios(URL)
-            const data = response.data
+            const {data} = await axios(URL)
 
             const dogTemp = data.map(temp=> temp.temperament)
 
-            //dividing temps and eliminating duplicated
+           
             const uniqueTemp = [...new Set(dogTemp.join(', ').split(', '))]
 
             await saveTempAtDb(Object.values(uniqueTemp))
         }
 
-        const tempFromDb = await Temperament.findAll() //in case its missing: {attributes:['name']}
+        const tempFromDb = await Temperament.findAll() 
         const tempDbArray = []
 
         tempFromDb.forEach(temp=>{

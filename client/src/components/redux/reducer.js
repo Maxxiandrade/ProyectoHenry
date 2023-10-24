@@ -1,47 +1,25 @@
 
 
-import { FILTER, ORDER } from "./action-types";
+import { FILTER, ORDER, ALL_DOGS, DOG_NAME, GET_TEMPERAMENTS } from "./action-types";
 
 
 
 const initialState = {
     dogs: [],
-    oldTemperaments:[]
+    allDogs:[],
+    allTemperaments:[]
 };
 
 const reducer = (state = initialState, action)=>{
     switch(action.type){
-            case FILTER:
-                const temperToFilter = action.payload;
-                if (genderToFilter === "All") {
-                  return {
-                    ...state,
-                    myFavorites: state.allCharacters 
-                  };
-                } else {
-                  const filteredCharacters = state.allCharacters.filter(character => character.gender === genderToFilter);
-                  
-                  return {
-                    ...state,
-                    myFavorites: filteredCharacters
-                  };
-                }
-              
-        case ORDER:
-            const orderType = action.payload
-            const sortedFavorites = [...state.myFavorites].sort((a,b)=>{
-                if(orderType === "A"){
-                    return b.id - a.id
-                } if (orderType === "D"){
-                    return a.id - b.id
-                }
-            })
-            return{
-                ...state,
-                myFavorites:sortedFavorites,
-
-            }
-        default:
+            case ALL_DOGS:
+                  return {...state, dogs: action.payload, allDogs: action.payload};
+            case DOG_NAME:
+                  return{...state, dogs: action.payload};
+            case GET_TEMPERAMENTS:
+                  return{...state, allTemperaments: action.payload};
+           
+         default:
             return {...state}
 }
 }

@@ -8,9 +8,16 @@
     flex: 1;
     flex-basis: 200px;
     max-width: 300px;
+
 }
 
-   
+.card:hover{
+    transition: 0.5s;
+    transform: scale(1.1)
+}
+.card:not(:hover){
+    transition: 0.5s;
+}
    .container{
     text-shadow: -1px -1px 0  #4F4A45,  
     1px -1px 0  #4F4A45,
@@ -24,7 +31,7 @@
 
    .h3{
     display: flex;
-    justify-content: last baseline;
+    justify-content: center;
     text-shadow: -1px -1px 0  #4F4A45,  
     1px -1px 0  #4F4A45,
    -1px 1px 0  #4F4A45,
