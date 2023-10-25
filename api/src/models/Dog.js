@@ -10,20 +10,24 @@ module.exports = (sequelize) => {
          primaryKey:true,
          defaultValue: DataTypes.UUIDV4
     },
-    imagen:{
-      type:DataTypes.STRING,
-      allowNull:false
-    },
     nombre: {
       type: DataTypes.STRING,
       allowNull: false,
     },
-    altura:{
-      type:DataTypes.JSON,
+    altMin:{
+      type:DataTypes.STRING,
       allowNull:false
     },
-    peso:{
-      type:DataTypes.JSON,
+    altMax:{
+      type:DataTypes.STRING,
+      allowNull:false
+    },
+    pesMin:{
+      type:DataTypes.STRING,
+      allowNull:false
+    },
+    pesMax:{
+      type:DataTypes.STRING,
       allowNull:false
     },
     vida:{

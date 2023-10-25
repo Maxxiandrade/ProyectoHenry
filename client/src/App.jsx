@@ -15,6 +15,8 @@ import Form from './components/Form/Form';
 function App() {
 
 
+
+
   useEffect(() => {
     switch (location.pathname) {
         case "/":
@@ -33,7 +35,7 @@ function App() {
       <Route path='/' element={<Landing></Landing>}/>
       <Route path='/home' element={<Home></Home>}/>
       <Route path='/detail/:id' element={<Detail/>}></Route>
-      <Route path='/createdog' element={<Form/>}></Route>
+      <Route path='/createdog' element={<Form />}></Route>
       </Routes>
     </div>
   </>
