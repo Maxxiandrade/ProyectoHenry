@@ -11,10 +11,12 @@ async function getTemperament(req,res){
 
             const dogTemp = data.map(temp=> temp.temperament)
 
-           
-            const uniqueTemp = [...new Set(dogTemp.join(', ').split(', '))]
+            const filteredTemp = dogTemp.filter(temp => temp !== "");
 
-            await saveTempAtDb(Object.values(uniqueTemp))
+            const uniqueTemp = [...new Set(filteredTemp.join(", ").split(", "))];
+            
+
+            await saveTempAtDb(uniqueTemp)
         }
 
         const tempFromDb = await Temperament.findAll() 

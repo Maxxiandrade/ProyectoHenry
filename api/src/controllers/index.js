@@ -35,16 +35,13 @@ const getDogs = async (req, res)=>{
 
 const dogById = async(req,res)=>{
     try {
-        const {id} = req.query
+        const {id} = req.params
         
-        // if(!Number(id)){
-        //     const dog = dogById(id)
-        //     res.status(200).json(dog)
-        // }
-        
+  
         const numberId = Number(id)
         const { data } = await axios(`${URL}?api_key=${API_KEY}`);
         const perroEncontrado = data.filter((perro)=>{return perro.id === numberId})
+        if(perroEncontrado.length >=1){
         const dogImage = perroEncontrado.map((perro) => {
             return {
               id: perro.id,
@@ -56,17 +53,15 @@ const dogById = async(req,res)=>{
               temperamento: perro.temperament
             };
           })
-
-        res.status(200).json(dogImage)
+        res.status(200).json(dogImage)}else{
+            const foundDog = await Dog.findByPk(id)
+            res.status(200).json(foundDog)
+        }
     } catch (error) {
        res.status(400).json({error: error.message})
    };
 };
 
-const dogByIdDb = async(id)=>{
-    const foundDog = await Dog.findByPk(id)
-        return foundDog
-};
 
 const dogByName = async (req, res) => {
     try {
