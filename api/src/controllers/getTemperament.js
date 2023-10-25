@@ -13,7 +13,7 @@ async function getTemperament(req,res){
 
             const filteredTemp = dogTemp.filter(temp => temp !== "");
 
-            const uniqueTemp = [...new Set(filteredTemp.join(", ").split(", "))];
+            const uniqueTemp = [...new Set(filteredTemp.join(", ").split(", ").sort().filter(Boolean))];
             
 
             await saveTempAtDb(uniqueTemp)

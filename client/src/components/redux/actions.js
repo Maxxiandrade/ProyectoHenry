@@ -41,3 +41,4 @@ export const getTempers = ()=>async(dispatch)=>{
         throw Error(error)
     }
 };
+

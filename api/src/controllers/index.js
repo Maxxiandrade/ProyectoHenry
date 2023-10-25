@@ -18,8 +18,8 @@ const getDogs = async (req, res)=>{
               id: perro.id,
               imagen: perro.image.url,
               nombre: perro.name,
-              altura: perro.height,
-              peso: perro.weight,
+              altura: perro.height.metric,
+              peso: perro.weight.metric,
               vida: perro.life_span,
               temperamento: perro.temperament
             };
@@ -33,33 +33,31 @@ const getDogs = async (req, res)=>{
         };
 };
 
-const dogById = async(req,res)=>{
+const dogById = async (req, res) => {
     try {
-        const {id} = req.params
-        
-  
-        const numberId = Number(id)
+        const { id } = req.params;
+        const numberId = Number(id);
         const { data } = await axios(`${URL}?api_key=${API_KEY}`);
-        const perroEncontrado = data.filter((perro)=>{return perro.id === numberId})
-        if(perroEncontrado.length >=1){
-        const dogImage = perroEncontrado.map((perro) => {
-            return {
-              id: perro.id,
-              imagen: perro.image.url,
-              nombre: perro.name,
-              altura: perro.height,
-              peso: perro.weight,
-              vida: perro.life_span,
-              temperamento: perro.temperament
+        const perroEncontrado = data.find((perro) => perro.id === numberId);
+
+        if (perroEncontrado) {
+            const dogImage = {
+                id: perroEncontrado.id,
+                imagen: perroEncontrado.image.url,
+                nombre: perroEncontrado.name,
+                altura: perroEncontrado.height?.metric,
+                peso: perroEncontrado.weight?.metric,
+                vida: perroEncontrado.life_span,
+                temperamento: perroEncontrado.temperament
             };
-          })
-        res.status(200).json(dogImage)}else{
-            const foundDog = await Dog.findByPk(id)
-            res.status(200).json(foundDog)
+            res.status(200).json(dogImage);
+        } else {
+            const foundDog = await Dog.findByPk(id);
+            res.status(200).json(foundDog);
         }
     } catch (error) {
-       res.status(400).json({error: error.message})
-   };
+        res.status(400).json({ error: error.message });
+    }
 };
 
 
@@ -111,9 +109,7 @@ const postDogs = async(req,res)=>{
 
         const newDog = await Dog.create({nombre, altura, peso, vida, imagen})
 
-        if(temperamento){
-          const temper =  await Temperament.findAll({where:{name: temperamento}})
-        }
+       
         const temper = await Temperament.findOrCreate({where:{name: temperamento}})
 
         res.status(200).json({newDog,temper})

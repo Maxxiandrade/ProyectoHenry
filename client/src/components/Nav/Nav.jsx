@@ -1,6 +1,6 @@
 import style from "./Nav.module.css";
 import SearchBar from "../Seachbar/Searchbar";
-import Temperaments from "../Temperaments/Temperaments";
+import Filters from "../Filters/Filters";
 import { Link } from "react-router-dom";
 
 
@@ -12,9 +12,10 @@ const Nav = ()=>{
                 Henry 
             </h1>
             <h2 className={style.h2}>Dogs</h2>
-            <Temperaments/>
             <SearchBar/>
-            <Link to='/'><li className={style.li}>Out</li></Link>
+            <Filters/>
+            <Link to='/createdog'><button>Create dog</button></Link>
+            <Link to='/'><button className={style.li}>Out</button></Link>
         </nav>
     )
 };
