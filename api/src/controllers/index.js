@@ -9,7 +9,6 @@ const URL = "https://api.thedogapi.com/v1/breeds"
 
 const getDogs = async (req, res)=>{
     try {
-
         const dbDogs = await Dog.findAll({
             include: Temperament, 
           });
@@ -77,40 +76,58 @@ const dogById = async (req, res) => {
 const dogByName = async (req, res) => {
     try {
         let { name } = req.query;
+        const nameQuery = name.toLowerCase().replace(/\s/g, '');
 
-        name = name.toLowerCase().replace(/\s/g, '');
+        // Obtener perros de la base de datos
+        const perroDb = await getDogName(nameQuery);
 
+        // Obtener perros de la API
         const { data } = await axios(`${URL}?api_key=${API_KEY}`);
-
         const matches = data.filter((perro) => {
             const perroName = perro.name.toLowerCase().replace(/\s/g, ''); 
-            return perroName.includes(name);
+            return perroName.includes(nameQuery);
         });
-        const dogs = matches.map((perro) => {
-            return {
-              key: perro.id,
-              id: perro.id,
-              imagen: perro.image.url,
-              nombre: perro.name,
-              altura: perro.height?.metric,
-              peso: perro.weight?.metric,
-              vida: perro.life_span,
-              temperamento: perro.temperament
-            };
-          });
 
-        if (!name) {
-            return res.status(400).json({ error: "Falta el parámetro 'name' en la consulta" });
+        // Transformar resultados de la API
+        const dogsFromApi = matches.map((perro) => {
+            return {
+                key: perro.id,
+                id: perro.id,
+                imagen: perro.image.url,
+                nombre: perro.name,
+                altura: perro.height?.metric,
+                peso: perro.weight?.metric,
+                vida: perro.life_span,
+                temperamento: perro.temperament
+            };
+        });
+
+        // Si hay resultados de la base de datos, agrégales una bandera para distinguirlos
+        let dogsFromDb = [];
+        if (perroDb) {
+            const dogData = {
+                nombre: perroDb.nombre,
+                id: perroDb.id,
+                altura: perroDb.altMin,
+                peso: perroDb.altMax,
+                vida: perroDb.vida,
+                temperamento: perroDb.temperaments.map((temperament) => temperament.name).join(", "),
+                fromDb: true // Agregamos una bandera para distinguir los perros de la base de datos
+            };
+            dogsFromDb.push(dogData);
         }
 
-        res.status(200).json(dogs);
+        // Combinar resultados y enviar la respuesta
+        const combinedDogs = dogsFromDb.concat(dogsFromApi);
+
+        res.status(200).json(combinedDogs);
     } catch (error) {
         res.status(500).json({ error: error.message });
     }
 };
 
 const getDogName = async(nombre)=>{
-    const perro = await Dog.findOne({where:{nombre: nombre}})
+    const perro = await Dog.findOne({where:{nombre: nombre}, include: Temperament})
     return perro
 };
 

@@ -16,7 +16,7 @@ const reducer = (state = initialState, action)=>{
             case ALL_DOGS:
                   return {...state, dogs: action.payload, allDogs: action.payload};
             case DOG_NAME:
-                  return{...state, dogs: action.payload};
+                  return{...state, dogs:action.payload};
             case GET_TEMPERAMENTS:
                   return{...state, allTemperaments: action.payload};
             case ORDER:

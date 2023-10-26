@@ -10,7 +10,6 @@ const Filters = ()=>{
     const [aux, setAux] = useState(false)
 
     const handleOrigin =(event)=>{
-        console.log(event.target.value);
         dispatch(handleFilterOrigin(event.target.value))
     }
 
