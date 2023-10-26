@@ -1,6 +1,6 @@
 import style from "./Filters.module.css"
 import { useSelector, useDispatch } from "react-redux";
-import { orderCards, filterCards } from "../redux/actions";
+import { orderCards, filterCards, handleFilterOrigin } from "../redux/actions";
 import { useState } from "react";
 
 const Filters = ()=>{
@@ -8,6 +8,11 @@ const Filters = ()=>{
     const temperamentos = useSelector(state=>state.allTemperaments)
 
     const [aux, setAux] = useState(false)
+
+    const handleOrigin =(event)=>{
+        console.log(event.target.value);
+        dispatch(handleFilterOrigin(event.target.value))
+    }
 
     const handleOrder = (event)=>{
         setAux(true)
@@ -20,7 +25,7 @@ const Filters = ()=>{
 
     return(
         <div>
-            <select onChange={handleFilter}>
+            <select onChange={handleOrigin}>
                 <option value="API">API</option>
                 <option value="Database">Database</option>
             </select>

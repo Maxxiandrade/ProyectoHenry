@@ -1,5 +1,5 @@
 import axios from "axios";
-import { FILTER, ORDER, ALL_DOGS, DOG_NAME, GET_TEMPERAMENTS } from "./action-types"
+import { FILTER, ORDER, ALL_DOGS, DOG_NAME, GET_TEMPERAMENTS, DOGS_ORIGIN } from "./action-types"
 
 
 export const getDogs = ()=>async(dispatch)=>{
@@ -41,4 +41,8 @@ export const getTempers = ()=>async(dispatch)=>{
         throw Error(error)
     }
 };
+
+export const handleFilterOrigin = (filter) => async(dispatch)=>{
+    dispatch({ type: DOGS_ORIGIN, payload: filter });
+  };
 

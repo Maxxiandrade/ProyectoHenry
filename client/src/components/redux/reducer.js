@@ -1,13 +1,14 @@
 
 
-import { FILTER, ORDER, ALL_DOGS, DOG_NAME, GET_TEMPERAMENTS } from "./action-types";
+import { FILTER, ORDER, ALL_DOGS, DOG_NAME, GET_TEMPERAMENTS, DOGS_ORIGIN } from "./action-types";
 
 
 
 const initialState = {
     dogs: [],
     allDogs:[],
-    allTemperaments:[]
+    allTemperaments:[],
+    dogsOrigin: "All"
 };
 
 const reducer = (state = initialState, action)=>{
@@ -57,12 +58,18 @@ const reducer = (state = initialState, action)=>{
                   const index = action.payload; //2
                   const temperToFilter = state.allTemperaments[index]
                   const filteredDogs = state.dogs.filter((dog) => dog.temperamento && dog.temperamento.includes(temperToFilter))              
-                  
-                 if(action.payload==="All"){
+                  if(action.payload==="All"){
                   return{...state, dogs: state.allDogs }
 
                  }
-             return {...state, dogs: filteredDogs}
+                  return {...state, dogs: filteredDogs}
+      
+            case DOGS_ORIGIN:
+                        const newDogsOrigin = action.payload; // API / DB
+                        const filteredDogsOrigin = state.allDogs.filter(dog => {
+                  return newDogsOrigin === "API" ? !dog.originDb : dog.originDb;
+                  });
+                  return { ...state, dogs: filteredDogsOrigin, dogsOrigin: newDogsOrigin };
          default:
             return {...state}
 }

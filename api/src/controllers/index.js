@@ -10,10 +10,11 @@ const URL = "https://api.thedogapi.com/v1/breeds"
 const getDogs = async (req, res)=>{
     try {
 
-        const {data} = await axios(`${URL}?api_key=${API_KEY}`)
-       
-        const dogs = data.map((perro) => {
-
+        const dbDogs = await Dog.findAll({
+            include: Temperament, 
+          });
+        const {data} = await axios(`${URL}?api_key=${API_KEY}`)      
+        const apiDogs = data.map((perro) => {
             return {
               id: perro.id,
               imagen: perro.image.url,
@@ -25,13 +26,25 @@ const getDogs = async (req, res)=>{
             };
           });
 
+          const dogs = dbDogs.map((dbDog) => ({
+            nombre: dbDog.nombre,
+            id: dbDog.id,
+            altura: dbDog.altMin,
+            peso: dbDog.altMax,
+            vida: dbDog.vida,
+            temperamento: dbDog.temperaments.map((temperament) => temperament.name).join(", "),
+            originDb: true,
+          }));
 
-
-                res.status(200).json(dogs)
+         
+          const allDogs = [...dogs,...apiDogs ];
+                res.status(200).json(allDogs)
     } catch (error) {
             res.status(500).json({error: error.message})
         };
 };
+
+
 
 const dogById = async (req, res) => {
     try {
@@ -101,19 +114,27 @@ const getDogName = async(nombre)=>{
     return perro
 };
 
-const postDogs = async(req,res)=>{
+const postDogs = async (req, res) => {
     try {
-        const {nombre, altMin, altMax, pesMin, pesMax, vida, temperamento} = req.body
+        const { nombre, altMin, altMax, pesMin, pesMax, vida, temperaments } = req.body;
 
-        if(nombre && altMin && altMax && pesMin && pesMax && vida ){     
-            const newDog = await Dog.create({nombre, altMin, altMax, pesMin, pesMax, vida})      
-            const perros = Dog.findAll()
-                const temper = await setTemperament.findOrCreate({where:{name: temperamento}})
-            res.status(200).json("Perro creado con éxito")
-        }else{res.status(404).json({error: "Falta info"})}
+        if (nombre && altMin && altMax && pesMin && pesMax && vida) {
+            const newDog = await Dog.create({ nombre, altMin, altMax, pesMin, pesMax, vida });
+
+            const temper = await Temperament.findAll({ where: { name: temperaments } });
+
+            if (temper.length > 0) {
+                await newDog.setTemperaments(temper);
+            }
+
+            await newDog.reload({ include: Temperament });
+            res.status(200).json(newDog);
+        } else {
+            res.status(404).json({ error: "Falta info" });
+        }
     } catch (error) {
-        res.status(500).json({error: error.message})
-    };
+        res.status(500).json({ error: error.message });
+    }
 };
 
 

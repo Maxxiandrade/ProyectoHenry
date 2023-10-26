@@ -6,7 +6,6 @@ import { useSelector } from "react-redux";
 
 const Form = (postDogs)=>{
     const tempers = useSelector(state=>state.allTemperaments)
-    console.log(tempers);
 
     const[dogInfo, setDogInfo] = useState({
         nombre:"",
@@ -15,7 +14,7 @@ const Form = (postDogs)=>{
         pesMin:"",
         pesMax:"",
         vida:"",
-        temperamento:[]
+        temperaments:[]
     });
 
     const [errors,setErrors]=useState({
@@ -26,19 +25,41 @@ const Form = (postDogs)=>{
         pesMax:"",
         vida:""
     });
-
-    const handleChange = (event)=>{
-        console.log(event.target.value);
-        setDogInfo({
-            ...dogInfo,
-            [event.target.name] : event.target.value
-        })
-        console.log(dogInfo);
+    
+    console.log(dogInfo);
+    const handleChange = (event) => {
+        const { name, value, type, checked } = event.target;
+    
+        if (type === "checkbox") {
+            const updatedTemperaments = checked 
+                ? [...dogInfo.temperaments, value] 
+                : dogInfo.temperaments.filter(item => item !== value);
+    
+            setDogInfo({
+                ...dogInfo,
+                temperaments: updatedTemperaments
+            });
+        } else {
+            setDogInfo({
+                ...dogInfo,
+                [name]: value
+            });
+        }
     };
 
 
     const handleSubmit=(event)=>{
         event.preventDefault();
+        const altura = `${dogInfo.altMin} - ${dogInfo.altMax}`;
+
+    // Combinar los valores de pesMin y pesMax
+    const peso = `${dogInfo.pesMin} - ${dogInfo.pesMax}`;
+    const dogData = {
+        ...dogInfo,
+        altura,
+        peso
+    };
+
       const {data} = axios.post('http://localhost:3001/dogs', dogInfo)
     };
 
@@ -75,7 +96,7 @@ const Form = (postDogs)=>{
     <input type="number" name="vida" id="vida" onChange={handleChange} value={dogInfo.vida} />
     <hr />
     {tempers.map((temper)=>{
-        return <label>{temper}<input type="checkbox" onChange={handleChange} value={dogInfo.temperamento}>{temper.name}</input></label>
+        return <label>{temper}<input type="checkbox" onChange={handleChange} value={temper}>{temper.name}</input></label>
     })}
     <hr />
     <button type="submit">Post dog</button>

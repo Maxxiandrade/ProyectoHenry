@@ -40,7 +40,7 @@ const Home = ()=>{
                 id={perro.id}
                 imagen={perro.imagen}
                 nombre={perro.nombre}
-                peso={perro.peso}
+                peso={perro.peso} 
                 temperamento={perro.temperamento}
             ></CardList>})}
             <Pagination dogsPerPage={dogsPerPage} dogs={perros} paginado={paginado} currentPage={currentPage}/>

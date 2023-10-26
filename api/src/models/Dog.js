@@ -33,6 +33,9 @@ module.exports = (sequelize) => {
     vida:{
       type:DataTypes.STRING,
       allowNull:false
-    }
+    },
+    originDb:{
+    type:DataTypes.BOOLEAN,
+    defaultValue: false}
   },{timestamps:false});
 };
