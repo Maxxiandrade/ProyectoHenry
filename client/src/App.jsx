@@ -25,7 +25,7 @@ function App() {
             break; 
         default:
             document.body.style.backgroundImage = null;
-            document.body.style.backgroundColor = "#F6F1EE";
+            document.body.style.backgroundColor = "#F0F0F0";
     }
 }, [location]);
   return (

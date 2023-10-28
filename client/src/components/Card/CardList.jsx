@@ -2,7 +2,9 @@ import React from 'react';
 import Card from './Card';
 import style from "./Card.module.css"
 import { Link } from 'react-router-dom';
-const Cards = ({ id, imagen, nombre,  peso, temperamento }) => {
+import dogPic from '../../assets/dog.png'
+
+const Cards = ({ id, imagen = dogPic, nombre,  peso, temperamento }) => {
     return (
         <>
         <Link to={`/detail/${id}`}>

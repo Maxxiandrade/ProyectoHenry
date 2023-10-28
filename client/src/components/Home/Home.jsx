@@ -20,7 +20,7 @@ const Home = ()=>{
     const lastDogIndex = currentPage * dogsPerPage // 8
     const firstDogIndex = lastDogIndex - dogsPerPage // 0
     const currentDogs = perros.slice(firstDogIndex, lastDogIndex)
-    console.log(perros);
+   
 
     const paginado = (pagenumber)=>{return setCurrentPage(pagenumber)}
 

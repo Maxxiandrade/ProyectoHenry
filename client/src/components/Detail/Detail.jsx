@@ -15,7 +15,9 @@ const Detail =()=>{
           setDog(data);
     
        } });
- }, [params?.id]);
+    }, [params?.id]);
+    
+    console.log(dog);
 
     return(
         <div>
