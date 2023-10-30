@@ -1,0 +1,20 @@
+import style from "./About.module.css"
+import linkedIn from "../../assets/linkedIn.png"
+import gitHub from "../../assets/github-svgrepo-com.svg"
+
+const About = ()=>{
+    return(
+        <nav className={style.about}>
+            
+            <p>Developed by: Maximiliano Andrade.</p>
+            <a href="https://github.com/Maxxiandrade">
+            <img src={gitHub} className={style.github}/>
+            </a>
+            <a href="https://www.linkedin.com/in/maximiliano-andrade-8ab0b6213/">
+            <img src={linkedIn} alt="" className={style.linkedin}/>
+            </a>
+        </nav>
+    )
+};
+
+export default About;

@@ -12,6 +12,20 @@
     line-height: 30px; 
     
 }
+.dots {
+    padding: 1px;
+    display: inline-block;
+    margin: 0 5px;
+    cursor: pointer;
+    
+    border-radius: 50%;
+    color: black;
+    width: 30px; 
+    height: 30px; 
+    text-align: center; 
+    line-height: 30px; 
+    
+}
 
 .li:hover{
     transform: scale(1.1)
@@ -30,5 +44,5 @@
     height: 30px; 
     text-align: center; 
     line-height: 30px; 
-    box-shadow: inset 0 0 4px #4F4A45;
+    box-shadow: inset 0 0 5px black;
 }

@@ -1,0 +1,13 @@
+.image {
+    display: flex;
+    margin-left: 5%;
+    border: 2px solid #4F4A45; 
+    border-radius: 5%;
+    height: 50%;
+    width: 50%;
+  
+}
+
+.nombre{
+    font: xx-large;
+}

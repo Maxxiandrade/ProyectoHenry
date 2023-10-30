@@ -26,7 +26,7 @@ const Form = (postDogs)=>{
         vida:""
     });
     
-    console.log(dogInfo);
+  
     const handleChange = (event) => {
         const { name, value, type, checked } = event.target;
     
@@ -74,7 +74,7 @@ const Form = (postDogs)=>{
             <Link to='/home'>
             <button>Back</button>
             </Link>
-            <form id="perro" onSubmit={handleSubmit}>
+            <form id="perro" key="dog" onSubmit={handleSubmit}>
     <hr />
     <label htmlFor="nombre" id="raza">Dog breed:</label>
     <br />

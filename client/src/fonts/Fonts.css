@@ -1,14 +1,14 @@
 @font-face{
-    font-family: 'Henry';
-    src: url('./Rickon.ttf') format('truetype')
+    font-family: 'rickon';
+    src: url('./Rickon.ttf');
 }
 
+
 @font-face {
-    font-family: 'rickoso'; /* Nombre descriptivo para la fuente */
-    src: url('./get_schwifty.ttf') format('truetype'); /* Ruta a tu archivo de fuente */
-  }
-  
-@font-face {
-    font-family: 'sancho'; /* Nombre descriptivo para la fuente */
-    src: url('./Smile\ Candy.ttf') format('truetype'); /* Ruta a tu archivo de fuente */
+  font-family: 'dogs';
+  src: url('./Smile_Candy.ttf') 
+}
+  @font-face {
+    font-family: "matrix";
+    src: url("./matrix.ttf") format("truetype");
   }

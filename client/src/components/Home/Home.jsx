@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import Nav from "../Nav/Nav";
+import About from "../About/About";
 import CardList from '../Card/CardList'
 import { useState, useEffect} from "react";
 import axios from "axios";
@@ -32,7 +33,7 @@ const Home = ()=>{
     
     return(
       <>
-      <div >
+      <div className={style.home} >
             <Nav/>
             <Pagination dogsPerPage={dogsPerPage} dogs={perros} paginado={paginado} currentPage={currentPage}/>
            { currentDogs.map((perro)=>{return <CardList
@@ -45,8 +46,8 @@ const Home = ()=>{
                 temperamento={perro.temperamento}
             ></CardList>})}
             <Pagination dogsPerPage={dogsPerPage} dogs={perros} paginado={paginado} currentPage={currentPage}/>
-           
             </div>
+            <About/>
       </>
     )
 };

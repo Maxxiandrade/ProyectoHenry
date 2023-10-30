@@ -28,7 +28,7 @@ const SearchBar =()=>{
    
     return(
         <>
-        <h2>Search a dog by its breed!</h2>
+        <h2 className={style.h2}>Search a dog by its breed!</h2>
         <img src={lupa} alt="" onClick={handleSearch} className={style.lupa}/>
         <input 
         className={style.searchbar}

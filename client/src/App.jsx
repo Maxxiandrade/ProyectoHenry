@@ -13,21 +13,7 @@ import Detail from './components/Detail/Detail';
 import Form from './components/Form/Form';
 
 function App() {
-
-
-
-
-  useEffect(() => {
-    switch (location.pathname) {
-        case "/":
-            document.body.style.backgroundImage = `url('${backgroundImg}')`;
-            document.body.style.backgroundColor = null; 
-            break; 
-        default:
-            document.body.style.backgroundImage = null;
-            document.body.style.backgroundColor = "#F0F0F0";
-    }
-}, [location]);
+  document.title = 'Henry Dogs';
   return (
     <>
     <div className="App">  

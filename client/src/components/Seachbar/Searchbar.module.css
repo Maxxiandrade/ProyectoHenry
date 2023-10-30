@@ -1,25 +1,31 @@
+
+.h2{
+    display: inline;
+ position: relative; 
+ left: 25%;
+ bottom: 20px;
+ 
+}
 .searchbar{
-    display: flexbox;
+    display: flex;
     border-radius: 10px;
     border-color: #4F4A45;
     width: 550px;
     height: 50px;
-    
+    margin-top: 35px;
     
 }
 
-.button{
-    width: 70px;
-    height: 50px;
-}
 
 .buttonX{
+    
     transition: transform 0.3s ease;
     padding: 1px;
     display: inline-block;
-    margin: 0 5px;
+    margin-top: 42px;
+    margin-left: 10px;
     cursor: pointer;
-    background-color: #4F4A45;
+    background-color: #1B2430;
     border-color: black;
     border-radius: 100%;
     color: #F6F1EE;
@@ -36,11 +42,15 @@
 }
 
 .lupa{
+    
     transition: transform 0.3s ease;
-  
     width: 30px;
     height: 30px;
-    top:30px
+    top:45px;
+    display: inline;
+    position: relative; 
+    left: 28%;
+
 }
 
 .lupa:hover{

@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import style from "./Detail.module.css";
 import axios from "axios"
 import { useParams } from "react-router-dom";
 import { Link } from "react-router-dom";
@@ -17,14 +18,14 @@ const Detail =()=>{
        } });
     }, [params?.id]);
     
-    console.log(dog);
+    
 
     return(
         <div>
         {dog && (
             <>
-                {dog.nombre && <h2>{dog.nombre}</h2>}
-                {dog.imagen && <img src={dog.imagen} alt={dog.nombre} />}
+                {dog.nombre && <h2 className={style.nombre}>{dog.nombre}</h2>}
+                {dog.imagen && <img src={dog.imagen} alt={dog.nombre} className={style.image}/>}
                 {dog.altura && <p>Average height: {dog.altura} Cm</p>}
                 {dog.peso && <p>Average weight: {dog.peso} Kg</p>}
                 {dog.vida && <p>Lifespan: {dog.vida}</p>}

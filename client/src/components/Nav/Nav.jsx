@@ -11,7 +11,7 @@ const Nav = ()=>{
             <h1 className={style.h1}>
                 Henry 
             </h1>
-            <h2 className={style.h2}>Dogs</h2>
+            <h2 className={style.dogs}>Dogs</h2>
             <SearchBar/>
             <Filters/>
             <Link to='/createdog'><button>Create dog</button></Link>

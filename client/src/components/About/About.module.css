@@ -1,0 +1,22 @@
+.about{
+    background-color: #191717;
+    color: aliceblue;
+    overflow: hidden;
+    background-attachment: fixed;
+    background-size: auto;
+    
+}
+
+.github{
+    
+    width: 35px;
+    height: 35px;
+    vertical-align: middle;
+    
+}
+
+.linkedin{
+    width: 70px;
+    height: 70px;
+    vertical-align: middle;
+}
