@@ -23,22 +23,20 @@ const Filters = ()=>{
     };
 
     return(
-        <div>
-            <select onChange={handleOrigin}>
-                <option value="API">API</option>
-                <option value="Database">Database</option>
+        <div>   
+            <select onChange={handleOrder} className={style.input}>
+                <option value="A">Ascendent</option>
+                <option value="B">Descendent</option>
             </select>
-            <select onChange={handleFilter}>
+            <select onChange={handleFilter} className={style.input}>
                 <option value="All">All</option>
            {temperamentos.map((temperamento, index)=>{
             return <option key={index} value={index}>{temperamento}</option>
            })}
            </select>
-            <select onChange={handleOrder}>
-                <option value="A">Ascendent</option>
-                <option value="B">Descendent</option>
-            </select>
-            <select onChange={handleOrder}>
+
+
+            <select onChange={handleOrder} className={style.input}>
                 <option value="">Weigth</option>
                 <option value="0-5">0-5Kg</option>
                 <option value="5-10">5-10Kg</option>
@@ -47,6 +45,10 @@ const Filters = ()=>{
                 <option value="20">+20Kg</option>
             </select>
 
+            <select onChange={handleOrigin} className={style.input}>
+                <option value="API">API</option>
+                <option value="Database">Database</option>
+            </select>
         </div>
     )
 };

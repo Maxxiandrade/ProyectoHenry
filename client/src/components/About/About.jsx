@@ -4,16 +4,16 @@ import gitHub from "../../assets/github-svgrepo-com.svg"
 
 const About = ()=>{
     return(
-        <nav className={style.about}>
+        <footer className={style.about}>
             
-            <p>Developed by: Maximiliano Andrade.</p>
-            <a href="https://github.com/Maxxiandrade">
+            <p>Developed and designed by: Maximiliano Andrade.</p>
+            <a href="https://github.com/Maxxiandrade/ProyectoHenry">
             <img src={gitHub} className={style.github}/>
             </a>
             <a href="https://www.linkedin.com/in/maximiliano-andrade-8ab0b6213/">
             <img src={linkedIn} alt="" className={style.linkedin}/>
             </a>
-        </nav>
+        </footer>
     )
 };
 

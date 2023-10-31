@@ -10,7 +10,7 @@ const URL = "https://api.thedogapi.com/v1/breeds"
 const getDogs = async (req, res)=>{
     try {
         const dbDogs = await Dog.findAll({
-            include: Temperament, 
+            include: Temperament,                   // Traigo a todos los perros y le pido que me incluya la tabla de Temperament
           });
         const {data} = await axios(`${URL}?api_key=${API_KEY}`)      
         const apiDogs = data.map((perro) => {
@@ -24,14 +24,14 @@ const getDogs = async (req, res)=>{
               temperamento: perro.temperament
             };
           });
-
+          console.log(dbDogs);
           const dogs = dbDogs.map((dbDog) => ({
             nombre: dbDog.nombre,
             id: dbDog.id,
-            altura: `${dbDog.altMin}-${dbDog.altMax} `,
-            peso: `${dbDog.pesMin}-${dbDog.pesMax} `,
+            altura: `${dbDog.altMin} - ${dbDog.altMax} `,
+            peso: `${dbDog.pesMin} - ${dbDog.pesMax} `,
             vida: dbDog.vida,
-            temperamento: dbDog.temperaments.map((temperament) => temperament.name).join(", "),
+            temperamento: dbDog.temperaments.map((temperament) => temperament.name).join(", "), // Lo mapeo porque viene en formato de array y por cada temperamento solamente quiero quedarme con el nombre
             originDb: true,
           }));
 
@@ -63,7 +63,9 @@ const dogById = async (req, res) => {
                 };
                 res.status(200).json(dogImage);
             } else {
-                const foundDog = await Dog.findByPk(id);
+                const foundDog = await Dog.findByPk(id, {
+                    include: Temperament,
+                  });
                 if (foundDog) {
                     const dogFromDatabase = {
                         id: foundDog.id,
@@ -71,7 +73,7 @@ const dogById = async (req, res) => {
                         altura: `${foundDog.altMin}-${foundDog.altMax} `,
                         peso: `${foundDog.pesMin}-${foundDog.pesMax} `,
                         vida: foundDog.vida,
-                        temperamento: foundDog.temperaments
+                        temperamento: foundDog.temperaments.map((temperament) => temperament.name).join(", ")
                     };
                     res.status(200).json(dogFromDatabase);
                 }
@@ -112,7 +114,7 @@ const dogByName = async (req, res) => {
             };
         });
 
-        // Si hay resultados de la base de datos, agrégales una bandera para distinguirlos
+        
         let dogsFromDb = [];
         if (perroDb) {
             const dogData = {
@@ -122,7 +124,7 @@ const dogByName = async (req, res) => {
                 peso: perroDb.altMax,
                 vida: perroDb.vida,
                 temperamento: perroDb.temperaments.map((temperament) => temperament.name).join(", "),
-                fromDb: true // Agregamos una bandera para distinguir los perros de la base de datos
+                fromDb: true 
             };
             dogsFromDb.push(dogData);
         }
@@ -137,7 +139,7 @@ const dogByName = async (req, res) => {
 };
 
 const getDogName = async(nombre)=>{
-    const perro = await Dog.findOne({where:{nombre: nombre}, include: Temperament})
+    const perro = await Dog.findOne({where:{nombre: nombre}, include: Temperament})  // encont
     return perro
 };
 

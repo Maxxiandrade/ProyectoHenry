@@ -8,14 +8,13 @@ const Nav = ()=>{
   
     return(
         <nav className={style.nav}>
-            <h1 className={style.h1}>
-                Henry 
-            </h1>
+            <Link to='/' className={style.link}>
+            <h1 className={style.h1}>Henry </h1>
             <h2 className={style.dogs}>Dogs</h2>
+            </Link>
             <SearchBar/>
+            <Link to='/createdog'><button className={style.input}>Create dog</button></Link>
             <Filters/>
-            <Link to='/createdog'><button>Create dog</button></Link>
-            <Link to='/'><button className={style.li}>Out</button></Link>
         </nav>
     )
 };

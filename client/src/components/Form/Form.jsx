@@ -3,6 +3,8 @@ import { useState, useEffect } from "react";
 import Validations from './Validations'
 import axios from "axios"
 import { useSelector } from "react-redux";
+import style from "./Form.module.css"
+
 
 const Form = (postDogs)=>{
     const tempers = useSelector(state=>state.allTemperaments)
@@ -71,36 +73,39 @@ const Form = (postDogs)=>{
 
     return(
         <>
+        <div className={style.background}>
             <Link to='/home'>
-            <button>Back</button>
+            <button className={style.button}>Back</button>
             </Link>
-            <form id="perro" key="dog" onSubmit={handleSubmit}>
+        <form id="perro" key="dog" onSubmit={handleSubmit}>
     <hr />
-    <label htmlFor="nombre" id="raza">Dog breed:</label>
+    <label htmlFor="nombre" id="raza" className={style.label}>Dog breed:</label>
     <br />
     <input type="text" name="nombre" id="nombre" onChange={handleChange} value={dogInfo.raza} /> {errors.nombre !== "" && <p >{errors.email}</p>}
     <hr />
     <br />
-    <label htmlFor="altMin" id="altura">Min height</label>
+    <label htmlFor="altMin" id="altura" className={style.label}>Min height</label>
     <input type="number" name="altMin" id="altMin" onChange={handleChange} value={dogInfo.altMin} />
-    <label htmlFor="altMax" id="altura">Max height</label>
+    <label htmlFor="altMax" id="altura" className={style.label}>Max height</label>
     <input type="number" name="altMax" id="altMax" onChange={handleChange} value={dogInfo.altMax} />
     <hr />
     <br />
-    <label htmlFor="pesMin" id="peso">Min weight</label>
-    <input type="number" name="pesMin" id="pesMin" onChange={handleChange} value={dogInfo.pesMin} />
-    <label htmlFor="pesMax" id="peso">Max weight</label>
+    <label htmlFor="pesMin" id="peso" className={style.label}>Min weight</label>
+    <input type="number" name="pesMin" id="pesMin" onChange={handleChange} value={dogInfo.pesMin}/>
+    <label htmlFor="pesMax" id="peso" className={style.label}>Max weight</label>
     <input type="number" name="pesMax" id="pesMax" onChange={handleChange} value={dogInfo.pesMax} />
     <hr />
-    <label htmlFor="vida" id="lifespan">Lifespan (years)</label>
+    <label htmlFor="vida" id="lifespan" className={style.label}>Lifespan (years)</label>
     <input type="number" name="vida" id="vida" onChange={handleChange} value={dogInfo.vida} />
     <hr />
+    <p>Select temperaments</p>
     {tempers.map((temper)=>{
-        return <label>{temper}<input type="checkbox" onChange={handleChange} value={temper}>{temper.name}</input></label>
+        return <label className={style.container}>{temper}<input type="checkbox" onChange={handleChange} value={temper} className={style.checkbox}>{temper.name}</input><span className={style.checkmark}></span></label>
     })}
     <hr />
-    <button type="submit">Post dog</button>
-</form>
+    <button type="submit" className={style.button}>Post dog</button>
+        </form>
+    </div>
 
         </>
     )

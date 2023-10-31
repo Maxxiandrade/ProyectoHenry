@@ -39,6 +39,7 @@ const SearchBar =()=>{
        
          <li className={style.buttonX} onClick={handleClear} >X</li>
         
+        
         </>
         )
         
