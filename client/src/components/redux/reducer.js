@@ -41,8 +41,8 @@ const reducer = (state = initialState, action)=>{
                   if (orderType === "15-20") {
                     return weightA > 15 && weightA <= 20 ? -1 : 1;
                   }
-                  if (orderType === "+20") {
-                    return weightA > 20 ? 1 : -1;
+                  if (orderType === "20") {
+                    return weightA > 20 ? -1 : 1;
                             }            
                   if(orderType === "A"){
                         return a.id - b.id
@@ -60,7 +60,6 @@ const reducer = (state = initialState, action)=>{
                   const filteredDogs = state.dogs.filter((dog) => dog.temperamento && dog.temperamento.includes(temperToFilter))              
                   if(action.payload==="All"){
                   return{...state, dogs: state.allDogs }
-
                  }
                   return {...state, dogs: filteredDogs}
       

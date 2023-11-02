@@ -21,18 +21,18 @@ const Detail =()=>{
     
 
     return(
-        <div>
+        <div className={style.background}>
         {dog && (
             <>
-                {dog.nombre && <h2 className={style.nombre}>{dog.nombre}</h2>}
+                {dog.nombre && <h2 className={style.name}>{dog.nombre}</h2>}
                 {dog.imagen && <img src={dog.imagen} alt={dog.nombre} className={style.image}/>}
-                {dog.altura && <p>Average height: {dog.altura} Cm</p>}
+                {dog.altura && <p className={style.h2}>Average height: {dog.altura} Cm</p>}
                 {dog.peso && <p>Average weight: {dog.peso} Kg</p>}
                 {dog.vida && <p>Lifespan: {dog.vida}</p>}
                 {dog.temperamento && <p>Temperament: {dog.temperamento}</p>}
                 <hr />
                 <Link to='/home'>
-            <button>Back</button>
+            <button className={style.input}>Back</button>
             </Link>
             </>
         )}

@@ -139,7 +139,7 @@ const dogByName = async (req, res) => {
 };
 
 const getDogName = async(nombre)=>{
-    const perro = await Dog.findOne({where:{nombre: nombre}, include: Temperament})  // encont
+    const perro = await Dog.findOne({where:{nombre: nombre}, include: Temperament})
     return perro
 };
 

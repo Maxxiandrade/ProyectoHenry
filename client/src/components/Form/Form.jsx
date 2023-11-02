@@ -6,7 +6,7 @@ import { useSelector } from "react-redux";
 import style from "./Form.module.css"
 
 
-const Form = (postDogs)=>{
+const Form = ()=>{
     const tempers = useSelector(state=>state.allTemperaments)
 
     const[dogInfo, setDogInfo] = useState({
@@ -69,7 +69,11 @@ const Form = (postDogs)=>{
         if(dogInfo.nombre !== "" || dogInfo.altMin !== "" || dogInfo.altMax !== "" || dogInfo.pesMin !== "" || dogInfo.altMax !== "" || dogInfo.vida !== ""){
         const perroValidado = Validations(dogInfo)
         setErrors(perroValidado)
-}},[dogInfo])
+    }},[dogInfo])
+
+    const handlePost = ()=>{
+        window.alert("Dog posted")
+    }
 
     return(
         <>
@@ -100,10 +104,10 @@ const Form = (postDogs)=>{
     <hr />
     <p>Select temperaments</p>
     {tempers.map((temper)=>{
-        return <label className={style.container}>{temper}<input type="checkbox" onChange={handleChange} value={temper} className={style.checkbox}>{temper.name}</input><span className={style.checkmark}></span></label>
+        return <label className={style.container} key={temper.id}>{temper}<input key={temper.name} type="checkbox" onChange={handleChange} value={temper} className={style.checkbox}>{temper.name}</input><span className={style.checkmark}></span></label>
     })}
     <hr />
-    <button type="submit" className={style.button}>Post dog</button>
+    <button type="submit" className={style.button} onClick={handlePost}>Post dog</button>
         </form>
     </div>
 

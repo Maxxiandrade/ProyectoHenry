@@ -19,17 +19,19 @@ const Filters = ()=>{
     };
 
     const handleFilter = (event)=>{
+   
         dispatch(filterCards(event.target.value))
     };
 
+
     return(
-        <div>   
+        <div >   
             <select onChange={handleOrder} className={style.input}>
                 <option value="A">Ascendent</option>
                 <option value="B">Descendent</option>
             </select>
             <select onChange={handleFilter} className={style.input}>
-                <option value="All">All</option>
+                <option value="All">All temperaments</option>
            {temperamentos.map((temperamento, index)=>{
             return <option key={index} value={index}>{temperamento}</option>
            })}
@@ -37,7 +39,7 @@ const Filters = ()=>{
 
 
             <select onChange={handleOrder} className={style.input}>
-                <option value="">Weigth</option>
+                <option value="">Average weigth</option>
                 <option value="0-5">0-5Kg</option>
                 <option value="5-10">5-10Kg</option>
                 <option value="10-15">10-15Kg</option>

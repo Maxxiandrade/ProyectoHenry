@@ -1,13 +1,27 @@
-.image {
-    display: flex;
-    margin-left: 5%;
-    border: 2px solid #4F4A45; 
-    border-radius: 5%;
-    height: 50%;
-    width: 50%;
-  
+
+  .image {
+     border-radius: 10%;
+     height: 30%;
+     width: 30%;
+  }
+  .background{
+    background-color: #F8F0E5;
+    overflow: hidden;
+    background-attachment: fixed;
+    background-size: auto;
 }
 
-.nombre{
-    font: xx-large;
+body{
+    background-color: #F8F0E5;
 }
+
+.input{
+    cursor: pointer;
+    text-align: center;
+    border: 2px solid rgba(255, 255, 255, 0.5);
+    background-color: rgba(0, 0, 0, 0.548);
+    border-radius: 10px;
+    color: bisque;
+    padding: 15px;
+    margin: 4px
+};
