@@ -7,3 +7,36 @@
     height: 100vh;
     overflow: hidden;
   }
+
+  .intro{
+    text-shadow: -1px -1px 0  black,  
+    1px -1px 0  black,
+   -1px 1px 0  black,
+    1px 1px 0 black;
+    color: wheat;
+    left: 33%;
+   
+    font-size: larger;
+    position: relative;
+    width: 600px;
+    height: 550px;
+    background: transparent;
+    border: 2px solid rgba(255, 255, 255, 0.5);
+    border-radius: 20px;
+    backdrop-filter: blur(15px);
+    display: grid;
+    justify-content: center;
+    align-items: center;
+}
+
+.button{
+    cursor: pointer;
+    text-align: center;
+    border: 2px solid rgba(255, 255, 255, 0.5);
+    background-color: rgba(0, 0, 0, 0.548);
+    border-radius: 10px;
+    color: bisque;
+    padding: 15px;
+    margin: 4px;
+    top: 30%;
+}

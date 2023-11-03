@@ -99,3 +99,8 @@
     padding: 15px;
     margin: 4px
 };
+
+.errors{
+  font-style: italic;
+    color: rgb(165, 24, 24);
+}

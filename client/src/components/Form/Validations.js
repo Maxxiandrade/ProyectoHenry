@@ -1,8 +1,8 @@
 const Validations = (dogInfo)=>{
     let errors = {}
 
-    if(!/^[A-Za-z]+$/.test(dogInfo.raza)){
-        errors.raza = "Can't contain numbers"
+    if(!/^[A-Za-z]+$/.test(dogInfo.nombre)){
+        errors.nombre = "Can't contain numbers"
     }; 
     if(isNaN(dogInfo.altMin)){
         errors.altMin = 'Must be a number'
@@ -20,7 +20,7 @@ const Validations = (dogInfo)=>{
         errors.pesMin = "Can't be higher than the max weight!"
     };
     if(dogInfo.pesMax<dogInfo.pesoMin){
-        errors.pesMax = "Can't be lowe than the min height!"
+        errors.pesMax = "Can't be lower than the min height!"
     }
     if(isNaN(dogInfo.pesMin)){
         errors.pesMin = 'Must be a number'

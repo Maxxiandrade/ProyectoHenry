@@ -54,7 +54,6 @@ const Form = ()=>{
         event.preventDefault();
         const altura = `${dogInfo.altMin} - ${dogInfo.altMax}`;
 
-    // Combinar los valores de pesMin y pesMax
     const peso = `${dogInfo.pesMin} - ${dogInfo.pesMax}`;
     const dogData = {
         ...dogInfo,
@@ -79,35 +78,70 @@ const Form = ()=>{
         <>
         <div className={style.background}>
             <Link to='/home'>
-            <button className={style.button}>Back</button>
+                    <button className={style.button}>Back</button>
             </Link>
+
         <form id="perro" key="dog" onSubmit={handleSubmit}>
     <hr />
-    <label htmlFor="nombre" id="raza" className={style.label}>Dog breed:</label>
+        <label htmlFor="nombre" id="raza" className={style.label}>Dog breed:</label>
     <br />
-    <input type="text" name="nombre" id="nombre" onChange={handleChange} value={dogInfo.raza} /> {errors.nombre !== "" && <p >{errors.email}</p>}
-    <hr />
-    <br />
-    <label htmlFor="altMin" id="altura" className={style.label}>Min height</label>
-    <input type="number" name="altMin" id="altMin" onChange={handleChange} value={dogInfo.altMin} />
-    <label htmlFor="altMax" id="altura" className={style.label}>Max height</label>
-    <input type="number" name="altMax" id="altMax" onChange={handleChange} value={dogInfo.altMax} />
+        <input type="text" 
+            name="nombre" 
+            id="nombre" 
+            onChange={handleChange} 
+            value={dogInfo.nombre}/> {errors.nombre !== "" && <p className={style.errors}>{errors.nombre}</p>}
     <hr />
     <br />
-    <label htmlFor="pesMin" id="peso" className={style.label}>Min weight</label>
-    <input type="number" name="pesMin" id="pesMin" onChange={handleChange} value={dogInfo.pesMin}/>
-    <label htmlFor="pesMax" id="peso" className={style.label}>Max weight</label>
-    <input type="number" name="pesMax" id="pesMax" onChange={handleChange} value={dogInfo.pesMax} />
+
+        <label htmlFor="altMin" id="altura" className={style.label}>Min height</label>
+        <input type="number" 
+            name="altMin" 
+            id="altMin" 
+            onChange={handleChange} 
+            value={dogInfo.altMin} /> {errors.altMin !== "" && <p className={style.errors}>{errors.altMin}</p>}
+
+        <label htmlFor="altMax" id="altura" className={style.label}>Max height</label>
+        <input type="number" 
+            name="altMax" 
+            id="altMax" 
+            onChange={handleChange} 
+            value={dogInfo.altMax} /> {errors.altMax !== "" && <p className={style.errors}>{errors.altMax}</p>}
     <hr />
-    <label htmlFor="vida" id="lifespan" className={style.label}>Lifespan (years)</label>
-    <input type="number" name="vida" id="vida" onChange={handleChange} value={dogInfo.vida} />
+    <br />
+
+        <label htmlFor="pesMin" id="peso" className={style.label}>Min weight</label>
+        <input type="number" 
+            name="pesMin" 
+            id="pesMin" 
+            onChange={handleChange} 
+            value={dogInfo.pesMin}/> {errors.pesMin !== "" && <p className={style.errors}>{errors.pesMin}</p>}
+
+        <label htmlFor="pesMax" id="peso" className={style.label}>Max weight</label>
+        <input type="number" 
+            name="pesMax" 
+            id="pesMax" 
+            onChange={handleChange} 
+            value={dogInfo.pesMax} /> {errors.pesMax !== "" && <p className={style.errors}>{errors.pesMax}</p>}
+
     <hr />
-    <p>Select temperaments</p>
-    {tempers.map((temper)=>{
-        return <label className={style.container} key={temper.id}>{temper}<input key={temper.name} type="checkbox" onChange={handleChange} value={temper} className={style.checkbox}>{temper.name}</input><span className={style.checkmark}></span></label>
-    })}
+
+        <label htmlFor="vida" id="lifespan" className={style.label}>Lifespan (years)</label>
+        <input type="number" 
+            name="vida" 
+            id="vida" 
+            onChange={handleChange} 
+            value={dogInfo.vida} /> {errors.vida !== "" && <p className={style.errors}>{errors.vida}</p>}
+
     <hr />
-    <button type="submit" className={style.button} onClick={handlePost}>Post dog</button>
+        <p>Select temperaments</p>
+        {tempers.map((temper)=>{
+           return <label className={style.container} key={temper.id}>{temper}<input key={temper.name} type="checkbox" onChange={handleChange} value={temper} className={style.checkbox}>{temper.name}</input><span className={style.checkmark}></span></label>
+        })}
+    <hr />
+        <button type="submit" 
+            className={style.button} 
+            onClick={handlePost} 
+            disabled={!dogInfo.nombre && !dogInfo.pesMin && !dogInfo.pesMax && !dogInfo.altMin && !dogInfo.altMax && !dogInfo.vida}>Post dog</button>
         </form>
     </div>
 
