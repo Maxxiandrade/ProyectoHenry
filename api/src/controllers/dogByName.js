@@ -1,9 +1,8 @@
-const { where, Op } = require('sequelize');
 const {Dog, Temperament} = require('../db');
 const axios = require('axios');
 require('dotenv').config();
 const {API_KEY} = process.env;
-const URL = "https://api.thedogapi.com/v1/breeds"
+const URL = "https://api.thedogapi.com/v1/breeds";
 
 
 const dogByName = async (req, res) => {
@@ -61,5 +60,5 @@ const getDogName = async(nombre)=>{
 };
 
 
-module.exports = dogByName
+module.exports = dogByName;
 

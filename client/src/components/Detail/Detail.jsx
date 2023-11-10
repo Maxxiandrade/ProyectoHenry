@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
 import style from "./Detail.module.css";
 import axios from "axios"
-import { useParams } from "react-router-dom";
-import { Link } from "react-router-dom";
+
+import { Link, useParams } from "react-router-dom";
 
 const Detail =()=>{
    const params = useParams();

@@ -3,7 +3,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { orderCards, filterCards, handleFilterOrigin } from "../redux/actions";
 import { useState } from "react";
 
-const Filters = ()=>{
+const Filters = ({paginado})=>{
     const dispatch = useDispatch();
     const temperamentos = useSelector(state=>state.allTemperaments)
 
@@ -11,24 +11,26 @@ const Filters = ()=>{
 
     const handleOrigin =(event)=>{
         dispatch(handleFilterOrigin(event.target.value))
-    }
+        paginado(1)
+    };
 
     const handleOrder = (event)=>{
-        setAux(true)
         dispatch(orderCards(event.target.value))
+        paginado(1)
     };
 
     const handleFilter = (event)=>{
-   
         dispatch(filterCards(event.target.value))
+        paginado(1)
     };
 
 
     return(
         <div >   
             <select onChange={handleOrder} className={style.input}>
-                <option value="A">Ascendent</option>
-                <option value="B">Descendent</option>
+                <option value="All">Order</option>
+                <option value="A">A-Z</option>
+                <option value="B">Z-A</option>
             </select>
             <select onChange={handleFilter} className={style.input}>
                 <option value="All">All temperaments</option>
@@ -48,6 +50,7 @@ const Filters = ()=>{
             </select>
 
             <select onChange={handleOrigin} className={style.input}>
+                <option value="All">All dogs</option>
                 <option value="API">API</option>
                 <option value="Database">Database</option>
             </select>

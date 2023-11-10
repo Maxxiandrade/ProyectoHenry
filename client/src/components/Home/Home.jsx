@@ -1,19 +1,21 @@
-import { Link } from "react-router-dom";
+import style from "./Home.module.css"
+
+//Components to render
 import Nav from "../Nav/Nav";
 import About from "../About/About";
 import CardList from '../Card/CardList'
-import { useState, useEffect} from "react";
-import axios from "axios";
 import Pagination from "../Pagination/Pagination";
-import style from "./Home.module.css"
+
+import { useState, useEffect} from "react";
 import {useDispatch, useSelector} from "react-redux";
+
 import { getDogs, getTempers } from "../redux/actions";
 
 
 const Home = ()=>{
    const perros = useSelector(state=>state.dogs);
-   
    const dispatch = useDispatch();
+   
 
     const [currentPage, setCurrentPage] = useState(1);
     const [dogsPerPage, setDogsPerPage] = useState(8);
@@ -25,6 +27,7 @@ const Home = ()=>{
 
     const paginado = (pagenumber)=>{return setCurrentPage(pagenumber)}
 
+    
     useEffect(()=>{
       dispatch(getDogs())
       dispatch(getTempers())
@@ -34,10 +37,9 @@ const Home = ()=>{
     return(
       <>
       <div className={style.home} >
-            <Nav/>
+            <Nav paginado={paginado}/>
             <Pagination dogsPerPage={dogsPerPage} dogs={perros} paginado={paginado} currentPage={currentPage}/>
            { currentDogs.map((perro)=>{return <CardList
-                
                 key={perro.id}
                 id={perro.id}
                 imagen={perro.imagen}
@@ -53,4 +55,4 @@ const Home = ()=>{
 };
 
 
-export default Home
+export default Home;

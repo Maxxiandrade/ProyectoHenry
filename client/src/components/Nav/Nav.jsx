@@ -4,7 +4,7 @@ import Filters from "../Filters/Filters";
 import { Link } from "react-router-dom";
 
 
-const Nav = ()=>{
+const Nav = ({paginado})=>{
   
     return(
         <nav className={style.nav}>
@@ -14,7 +14,7 @@ const Nav = ()=>{
             </Link>
             <SearchBar/>
             <Link to='/createdog'><button className={style.input}>Create dog</button></Link>
-            <Filters/>
+            <Filters paginado={paginado}/>
         </nav>
     )
 };

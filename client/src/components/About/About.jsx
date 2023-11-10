@@ -1,6 +1,6 @@
-import style from "./About.module.css"
-import linkedIn from "../../assets/linkedIn.png"
-import gitHub from "../../assets/github-svgrepo-com.svg"
+import style from "./About.module.css";
+import linkedIn from "../../assets/linkedIn.png";
+import gitHub from "../../assets/github-svgrepo-com.svg";
 
 const About = ()=>{
     return(

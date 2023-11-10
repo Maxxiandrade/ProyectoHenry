@@ -1,6 +1,6 @@
-const axios = require('axios')
-const URL = "https://api.thedogapi.com/v1/breeds"
-const {Temperament} = require('../db')
+const axios = require('axios');
+const URL = "https://api.thedogapi.com/v1/breeds";
+const {Temperament} = require('../db');
 
 async function getTemperament(req,res){
     try {
@@ -44,4 +44,4 @@ async function saveTempAtDb(temps){
     }
 }
 
-module.exports = getTemperament
+module.exports = getTemperament;

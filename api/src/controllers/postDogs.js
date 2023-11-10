@@ -1,4 +1,3 @@
-
 const {Dog, Temperament} = require('../db');
 
 const postDogs = async (req, res) => {

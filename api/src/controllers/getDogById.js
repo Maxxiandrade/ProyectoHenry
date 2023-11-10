@@ -2,7 +2,7 @@ const {Dog, Temperament} = require('../db');
 const axios = require('axios');
 require('dotenv').config();
 const {API_KEY} = process.env;
-const URL = "https://api.thedogapi.com/v1/breeds"
+const URL = "https://api.thedogapi.com/v1/breeds";
 
 const dogById = async (req, res) => {
     try {
@@ -31,7 +31,7 @@ const dogById = async (req, res) => {
                         nombre: foundDog.nombre,
                         altura: `${foundDog.altMin}-${foundDog.altMax} `,
                         peso: `${foundDog.pesMin}-${foundDog.pesMax} `,
-                        vida: foundDog.vida,
+                        vida:` ${foundDog.vida} years`,
                         temperamento: foundDog.temperaments.map((temperament) => temperament.name).join(", ")
                     };
                     res.status(200).json(dogFromDatabase);

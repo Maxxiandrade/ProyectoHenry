@@ -2,7 +2,7 @@ const {Dog, Temperament} = require ('../db');
 const axios = require ('axios');
 require('dotenv').config();
 const {API_KEY} = process.env;
-const URL = "https://api.thedogapi.com/v1/breeds"
+const URL = "https://api.thedogapi.com/v1/breeds";
 
 const getDogs = async (req, res)=>{
     try {
@@ -28,7 +28,7 @@ const getDogs = async (req, res)=>{
             altura: `${dbDog.altMin} - ${dbDog.altMax} `,
             peso: `${dbDog.pesMin} - ${dbDog.pesMax} `,
             vida: dbDog.vida,
-            temperamento: dbDog.temperaments.map((temperament) => temperament.name).join(", "), // Lo mapeo porque viene en formato de array y por cada temperamento solamente quiero quedarme con el nombre
+            temperamento: dbDog.temperaments.map((temperament) => temperament.name).join(", "), 
             originDb: true,
           }));
 
@@ -40,4 +40,4 @@ const getDogs = async (req, res)=>{
         };
 };
 
-module.exports = getDogs
+module.exports = getDogs;

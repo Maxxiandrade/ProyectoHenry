@@ -1,13 +1,15 @@
+import style from "./Form.module.css";
+
+import Validations from './Validations';
+import axios from "axios";
+
 import { Link } from "react-router-dom";
 import { useState, useEffect } from "react";
-import Validations from './Validations'
-import axios from "axios"
 import { useSelector } from "react-redux";
-import style from "./Form.module.css"
 
 
 const Form = ()=>{
-    const tempers = useSelector(state=>state.allTemperaments)
+    const tempers = useSelector(state=>state.allTemperaments);
 
     const[dogInfo, setDogInfo] = useState({
         nombre:"",
@@ -27,8 +29,15 @@ const Form = ()=>{
         pesMax:"",
         vida:""
     });
+
+    useEffect(()=>{
+        if(dogInfo.nombre !== "" || dogInfo.altMin !== "" || dogInfo.altMax !== "" || dogInfo.pesMin !== "" || dogInfo.altMax !== "" || dogInfo.vida !== ""){
+        const perroValidado = Validations(dogInfo)
+        setErrors(perroValidado)
+    }},[dogInfo])
     
   
+
     const handleChange = (event) => {
         const { name, value, type, checked } = event.target;
     
@@ -54,25 +63,15 @@ const Form = ()=>{
         event.preventDefault();
         const altura = `${dogInfo.altMin} - ${dogInfo.altMax}`;
 
-    const peso = `${dogInfo.pesMin} - ${dogInfo.pesMax}`;
-    const dogData = {
-        ...dogInfo,
-        altura,
-        peso
-    };
-
+        const peso = `${dogInfo.pesMin} - ${dogInfo.pesMax}`;
+   
       const {data} = axios.post('http://localhost:3001/dogs', dogInfo)
     };
 
-    useEffect(()=>{
-        if(dogInfo.nombre !== "" || dogInfo.altMin !== "" || dogInfo.altMax !== "" || dogInfo.pesMin !== "" || dogInfo.altMax !== "" || dogInfo.vida !== ""){
-        const perroValidado = Validations(dogInfo)
-        setErrors(perroValidado)
-    }},[dogInfo])
 
     const handlePost = ()=>{
         window.alert("Dog posted")
-    }
+    };
 
     return(
         <>
@@ -83,6 +82,7 @@ const Form = ()=>{
 
         <form id="perro" key="dog" onSubmit={handleSubmit}>
     <hr />
+  
         <label htmlFor="nombre" id="raza" className={style.label}>Dog breed:</label>
     <br />
         <input type="text" 
@@ -134,14 +134,16 @@ const Form = ()=>{
 
     <hr />
         <p>Select temperaments</p>
-        {tempers.map((temper)=>{
-           return <label className={style.container} key={temper.id}>{temper}<input key={temper.name} type="checkbox" onChange={handleChange} value={temper} className={style.checkbox}>{temper.name}</input><span className={style.checkmark}></span></label>
+        {tempers.map((temper, index)=>{
+           return <label className={style.container} key={index}>{temper}<input key={index} type="checkbox" onChange={handleChange} value={temper} className={style.checkbox}>{temper.name}</input><span className={style.checkmark}></span></label>
         })}
     <hr />
+      
         <button type="submit" 
             className={style.button} 
             onClick={handlePost} 
             disabled={!dogInfo.nombre && !dogInfo.pesMin && !dogInfo.pesMax && !dogInfo.altMin && !dogInfo.altMax && !dogInfo.vida}>Post dog</button>
+            
         </form>
     </div>
 
@@ -149,4 +151,4 @@ const Form = ()=>{
     )
 };
 
-export default Form
+export default Form;
